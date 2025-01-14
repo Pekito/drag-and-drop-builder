@@ -3,7 +3,7 @@ import {createResultError, createResultSuccess, type Result, type TaggedType } f
 
 type HtmlTextTags = "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "p" | "span" | "strong";
 
-export type HtmlAttributes = Record<string,string>;
+export type HtmlAttributes = Record<string,string | number>;
 export type HtmlNode<Tag extends string = string, Attributes extends HtmlAttributes = HtmlAttributes> = TaggedType<"html-node", {
     content: HtmlNode | string | undefined | Array<HtmlNode>
     attributes: Attributes
@@ -16,8 +16,8 @@ export type HtmlContent = HtmlNode | Array<HtmlNode | HtmlStringNode>;
 export type ImageAttributes = {
     src: string;
     alt: string;
-    width?: string;
-    height?: string;
+    width?: number;
+    height?: number;
   };
 
 export type ImageNode = HtmlNode<"img", ImageAttributes>;
