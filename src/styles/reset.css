@@ -40,6 +40,9 @@
     text-wrap: balance;
   }
   
+  ul, ol {
+    list-style: none;
+  }
   /*
     9. Create a root stacking context
   */
