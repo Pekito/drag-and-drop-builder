@@ -82,7 +82,10 @@
   const handleNodeOrderChange = (newNodes: Array<BlockNodeProps>) => nodes.value = newNodes;
   const handleNodeTitleChange = (nodeIndex: number, newTitle: string) => nodes.value[nodeIndex].title = newTitle
   const handleNodeDelete = (nodeIndex: number) => nodes.value.splice(nodeIndex, 1);
-  const handleNodeDuplication = (nodeIndex: number) => nodes.value.splice(nodeIndex, 0, {...nodes.value[nodeIndex]})
+  const handleNodeDuplication = (nodeIndex: number) => {
+    const duplicated = JSON.parse(JSON.stringify(nodes.value[nodeIndex]))
+    nodes.value.splice(nodeIndex, 0, duplicated)
+  }
 </script>
 
 <style scoped>
