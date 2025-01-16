@@ -12,6 +12,7 @@ type CreateNodeBlockParams<T extends HtmlNode> = {
   nodeProps: HtmlNodeProps<T>,
   title: string
 }
+export type HtmlImageNodeProps = HtmlNodeProps<ImageNode>;
 export const createNodeBlock = <T extends HtmlNode>(params: CreateNodeBlockParams<T>): ComponentNodeProps<T> => {
     return {
         key: generateRandomStringKey(),
