@@ -26,8 +26,8 @@
   
       <ul id="nodes">
           <li v-for="(node, index) in nodes">
-            <component 
-              :is="nodeToComponent(node)"
+            <component
+              :is="nodeToComponent(node) as any"
               v-bind="node.props" 
               :blockIndex="index"
               @onContentChange="(content: HtmlContent) => node.props.content = content " 
