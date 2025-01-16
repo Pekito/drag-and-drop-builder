@@ -2,9 +2,9 @@
     <DialogBox ref="dialogRef" id="edit_nodes">
       <template #title>Editing Blocks...</template>
       <template #body>
-        <div class="actions">
-        <button class="button dialog_button" @click="emit('onAddNewNodeClick', 'p')">+ Add Text</button>
-        <button class="button dialog_button" @click="emit('onAddNewNodeClick', 'img')">+ Add Image</button>
+        <div class="button_group">
+        <button class="button add_node_button" @click="emit('onAddNewNodeClick', 'p')">+ Add Text</button>
+        <button class="button add_node_button" @click="emit('onAddNewNodeClick', 'img')">+ Add Image</button>
       </div>
         <Draggable 
           v-model="localNodes" 
@@ -15,12 +15,12 @@
           handle=".item_position""
           >
           <template #item="{element, index}">
-            <div class="edit_nodes__item">
+            <div class="list_item">
               <button class="item_position">☰</button>
-              <p class="item_title" contenteditable @input="(e) => emit('onNodeTitleChange', index, e.target.textContent)">{{ element.title }}</p>
+              <p class="item_title" contenteditable @input="(e) => emit('onNodeTitleChange', index, (e.target as HTMLElement).textContent!)">{{ element.title }}</p>
               <div style="display: flex; gap: 16px; margin-left: auto; align-items: center;">
-                <p class="edit_nodes__duplicate" @click="emit('onDuplicateNode', index)">📋</p>
-                <p class="edit_nodes__delete" @click="emit('onDeleteNode', index)">❌</p>
+                <button class="item_action" @click="emit('onDuplicateNode', index)">📋</button>
+                <button class="item_action" @click="emit('onDeleteNode', index)">❌</button>
               </div>
             </div>
           </template>
@@ -64,12 +64,12 @@ import type { BlockNodeProps } from '../core/BlockNode';
     .edit_nodes__list {
       display: grid;
     }
-    .actions {
+    .button_group {
       display: flex;
       gap: 16px;
       margin-bottom: 24px;
     }
-    .dialog_button {
+    .add_node_button {
       padding: 8px;
       font-size: var(--text-size-050);
       font-weight: 600;
@@ -77,7 +77,7 @@ import type { BlockNodeProps } from '../core/BlockNode';
     
   }
  
-  .edit_nodes__item {
+  .list_item {
     display: flex;
     align-items: center;
     width: 100%;
@@ -85,8 +85,10 @@ import type { BlockNodeProps } from '../core/BlockNode';
     border-top: 1px solid #EDEDED;
     &:not(:first-of-type){ border-bottom: 1px solid #EDEDED;}
     padding: 8px;
-    .edit_nodes__delete {
-      font-size: 12px;
+    .item_action {
+      font-size: var(--text-size-100);
+      background: none;
+      border: none;
     }
     .item_position {
       width: 40px;
