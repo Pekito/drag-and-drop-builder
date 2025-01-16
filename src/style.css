@@ -3,12 +3,13 @@
 *, *::before, *::after {
     box-sizing: border-box;
 }
-
+button {
+    cursor: pointer;
+}
 .button {
     border-radius: 8px;
     border: none;
     display: flex;
     align-items: center;
     justify-content: center;
-    cursor: pointer;  
   }
