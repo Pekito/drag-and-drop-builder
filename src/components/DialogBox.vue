@@ -1,9 +1,12 @@
 <template>
     <dialog ref="dialog" class="dialog_box">
       <div class="dialog_box__content">
-        <button @click="closeDialog" class="dialog_box__close">&times;</button>
+        <header class="dialog_box__header">
+            <h2 class="dialog_box__title"><slot name="title"></slot></h2>
+            <button @click="closeDialog" class="dialog_box__close">&times;</button>
+        </header>
         <section class="dialog_box__body">
-          <slot></slot>
+          <slot name="body"></slot>
         </section>
       </div>
     </dialog>
@@ -12,7 +15,6 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 
-// Define emits
 const emit = defineEmits<{
     (e: 'close'): void;
 }>();
@@ -37,24 +39,32 @@ defineExpose({
 </script>
   
 <style scoped>
-    /* TODO: Finish Styles */
     .dialog_box {
         max-width: 100vw;
         width: 100vw;
-        margin: 40px auto;
         gap: 16px;
-        padding-top: 45px;
+        border: none;
+        @media(min-width: 980px) {
+            width: 25vw;
+            margin: auto;
+        }
+        
     }
     .dialog_box__close {
-        position: absolute;
-        top: 10px;
-        right: 20px;
         background: none;
         border: none;
         font-size: var(--text-size-500);
         line-height: normal;
     }
-    .dialog_box__body {
-        min-height: 200px;
+    .dialog_box__content {
+        padding: 16px;
+    }
+    .dialog_box__header {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 16px;
+    }
+    .dialog_box__title {
+        font-size: var(--text-size-400);
     }
 </style>
