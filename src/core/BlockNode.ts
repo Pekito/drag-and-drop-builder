@@ -24,7 +24,7 @@ export const createNodeBlock = <T extends HtmlNode>(params: CreateNodeBlockParam
 export const createImageNodeBlock = (): ComponentNodeProps<ImageNode> => createNodeBlock({
     nodeProps: {
       htmlTag: "img",
-      content: undefined,
+      content: null,
       attributes: {
         src: "",
         alt: "",

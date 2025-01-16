@@ -31,7 +31,7 @@
             width: 0,
             height: 0
         },
-        content: undefined
+        content: null
     });
     
     const emit = defineEmits<{

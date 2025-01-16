@@ -5,7 +5,7 @@ type HtmlTextTags = "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "p" | "span" | "st
 
 export type HtmlAttributes = Record<string,string | number>;
 export type HtmlNode<Tag extends string = string, Attributes extends HtmlAttributes = HtmlAttributes> = TaggedType<"html-node", {
-    content: HtmlNode | string | undefined | Array<HtmlNode>
+    content: HtmlNode | string | null | Array<HtmlNode>
     attributes: Attributes
     classes: Array<string>
     selfClosing: boolean
@@ -43,7 +43,7 @@ export const createImageNode = (
     });
     const imageNode: ImageNode = {
         _tag: "html-node",
-        content: undefined,
+        content: null,
         attributes: props.attributes,
         classes: props.classes ?? [],
         selfClosing: true,
