@@ -33,8 +33,8 @@
           </li>
       </ul>
       <div class="actions">
-        <button class="button button--add" @click="() => addNewNode(createTextNodeBlock())">[+] Add Text</button>
-        <button class="button button--add" @click="() => addNewNode(createImageNodeBlock())">[+] Add Image</button>
+        <button class="button button--add" @click="() => handleAddNewNodeClick('p')">[+] Add Text</button>
+        <button class="button button--add" @click="() => handleAddNewNodeClick('img')">[+] Add Image</button>
       </div>
     </div>
   </div>
@@ -49,13 +49,8 @@
   import EditBlocksDialog from './components/EditBlocksDialog.vue';
  
   const nodes = ref<Array<BlockNodeProps>>([]);
-  const editBlocksDialog = ref<InstanceType<typeof EditBlocksDialog> | null>(null);
-  const htmlTagToComponent = (tag: "img" | "p") => {
-    switch(tag) {
-      case 'img': return ImageNode
-      case 'p': return TextNode;
-    }
-  }
+  const editBlocksDialog = ref<InstanceType<typeof EditBlocksDialog>>();
+
   const nodeToComponent = (node: BlockNodeProps) => {
     switch(node.props.htmlTag) {
       case 'img': return ImageNode
@@ -82,8 +77,8 @@
   const exportStructure = () => {
     const propList = nodes.value.map(node => node.props);
     console.log(JSON.stringify(propList));
+    window.alert("Exported to Console 😉")
   }
-  const addNewNode = (node: BlockNodeProps) => nodes.value.push(node);
   const handleNodeOrderChange = (newNodes: Array<BlockNodeProps>) => nodes.value = newNodes;
   const handleNodeTitleChange = (nodeIndex: number, newTitle: string) => nodes.value[nodeIndex].title = newTitle
   const handleNodeDelete = (nodeIndex: number) => nodes.value.splice(nodeIndex, 1);
