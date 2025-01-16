@@ -8,7 +8,7 @@
 </template>
 
 <script setup lang="ts">
-import { defineProps, defineEmits, ref } from 'vue';
+import { ref } from 'vue';
 import type { TextNode } from '../core/HtmlNode';
 import type { HtmlNodeProps } from '../core/BlockNode';
 type TextNodeProps = HtmlNodeProps<TextNode>
