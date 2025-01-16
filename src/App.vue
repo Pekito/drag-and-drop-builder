@@ -8,6 +8,7 @@
     </div>
   </aside>
   <div id="blocks">
+    <EditImageDialog ref="editImageDialogRef" @onImageChange="handleImageChange"/>
     <EditBlocksDialog 
       ref="editBlocksDialog"
       :nodes="nodes"
@@ -24,10 +25,11 @@
       </header>
   
       <ul id="nodes">
-          <li v-for="node in nodes">
+          <li v-for="(node, index) in nodes">
             <component 
               :is="nodeToComponent(node)"
               v-bind="node.props" 
+              :blockIndex="index"
               @onContentChange="(content: HtmlContent) => node.props.content = content " 
               @onAttributeChange="(attributes: HtmlAttributes) => node.props.attributes = attributes"/>
           </li>
@@ -41,13 +43,15 @@
 </main>
 </template>
 <script setup lang="ts">
-  import {ref} from 'vue';
+  import {provide, ref} from 'vue';
   import TextNode from './components/TextNode.vue';
   import ImageNode from './components/ImageNode.vue';
-  import { createImageNodeBlock, createTextNodeBlock, type BlockNode, type BlockNodeProps } from './core/BlockNode';
+  import { createImageNodeBlock, createTextNodeBlock, type BlockNodeProps, type HtmlImageNodeProps} from './core/BlockNode';
   import type { HtmlAttributes, HtmlContent } from './core/HtmlNode';
   import EditBlocksDialog from './components/EditBlocksDialog.vue';
- 
+  import EditImageDialog from './components/EditImageDialog.vue';
+  const editImageDialogRef = ref<InstanceType<typeof EditImageDialog>>();
+  provide('EditImageDialogRef', editImageDialogRef);
   const nodes = ref<Array<BlockNodeProps>>([]);
   const editBlocksDialog = ref<InstanceType<typeof EditBlocksDialog>>();
 
@@ -85,6 +89,9 @@
   const handleNodeDuplication = (nodeIndex: number) => {
     const duplicated = JSON.parse(JSON.stringify(nodes.value[nodeIndex]))
     nodes.value.splice(nodeIndex, 0, duplicated)
+  }
+  const handleImageChange = (nodeIndex: number, newProps: HtmlImageNodeProps) => {
+    nodes.value[nodeIndex].props = newProps;
   }
 </script>
 
