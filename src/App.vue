@@ -116,40 +116,21 @@
       flex-direction: row;
       gap: unset;
       justify-content: space-between;
-  } 
-  }
-  #blocks {
-    grid-area: blocks;
-  }
-  #nodes {
-    display: grid;
-    gap: 8px;
-    margin-bottom: 16px;
-  }
-  .menu_title {
-    font-weight: 600;
-    font-size: var(--text-size-300);
-  }
-  .button--export {
-    background: #09C269;
-    padding: 12px 20px;
-    color: white;
-  }
-  .button--edit {
-    background: none;
-  }
-  .button--add {
-    background-color: rgba(209, 213, 219, 1);
-    color: rgba(55, 65, 81, 1);
-    font-size: var(--text-size-100);
-    padding: 12px 0;
-    width: 100%;
-  }
-
- 
-  .actions {
-    display: flex;
-    gap: 16px;
+    } 
+    .menu_title {
+      font-weight: 600;
+      font-size: var(--text-size-300);
+    }
+    .export_area {
+      display: flex; 
+      align-items: center; 
+      justify-content: center;
+    }
+    .button--export {
+      background: #09C269;
+      padding: 12px 20px;
+      color: white;
+    }
   }
   #preview {
     padding: 16px 16px 0 16px;
@@ -161,11 +142,33 @@
       align-items: center;
       margin-bottom: 16px;
     }
+    .button--edit {
+      background: none;
+    }
   }
-  
-  .export_area {
-    display: flex; 
-    align-items: center; 
-    justify-content: center;
+  #blocks {
+    grid-area: blocks;
+    .actions {
+      display: flex;
+      gap: 16px;
+    }
+    .button--add {
+      background-color: rgba(209, 213, 219, 1);
+      color: rgba(55, 65, 81, 1);
+      font-size: var(--text-size-100);
+      padding: 12px 0;
+      width: 100%;
+    }
+
   }
+  #nodes {
+    display: grid;
+    gap: 8px;
+    margin-bottom: 16px;
+  }
+
+
+ 
+
+
 </style>
