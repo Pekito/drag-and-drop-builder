@@ -2,41 +2,24 @@
     <div :class="{'image_node__wrapper': true, 'no_image': !imageAttributes.src}" >
         <button class="preview_edit" v-if="imageAttributes.src" @click="openEditDialog">📝</button>
         <DialogBox ref="editDialogRef">
-            <!-- Todo: Finish Edit Image Styles -->
-            <h1>Editing Image...</h1>
-            <div class="form-group">
-                <label for="width">Width:</label>
-                <input
-                    type="number"
-                    id="width"
-                    v-model.number="imageAttributes.width"
-                    min="1"
-                    placeholder="Width"
-                />
+            <template #title>
+                Editing Image...
+            </template>
+            <template #body>
+                <div class="form_group">
+                    <label for="alt">Alternative Text:</label>
+                    <input
+                        type="text"
+                        id="alt"
+                        v-model="imageAttributes.alt"
+                        placeholder="Alternative Text"
+                    />
                 </div>
-                <div class="form-group">
-                <label for="height">Height:</label>
-                <input
-                    type="number"
-                    id="height"
-                    v-model.number="imageAttributes.height"
-                    min="1"
-                    placeholder="Height"
-                />
-                </div>
-                <div class="form-group">
-                <label for="alt">Alt Text:</label>
-                <input
-                    type="text"
-                    id="alt"
-                    v-model="imageAttributes.alt"
-                    placeholder="Alternative Text"
-                />
-            </div>
+            </template>
         </DialogBox>
         <div :class="{'image_node': true}" @click="openFileInput">
             <div v-if="imageAttributes.src" class="preview_container">
-                <img :src="imageAttributes.src" alt="Selected Image" class="image_node__preview" :style="imageStyles"/>
+                <img :src="imageAttributes.src" alt="Selected Image" class="image_node__preview"/>
             </div>
             <div v-else class="image_node__placeholder">No Image</div>
             <input
@@ -51,7 +34,7 @@
   </template>
   
   <script setup lang="ts">
-    import { computed, ref } from 'vue';
+    import { ref } from 'vue';
     import DialogBox from './DialogBox.vue';
     import type { ImageNode } from '../core/HtmlNode';
     import type { HtmlNodeProps } from '../core/BlockNode';
@@ -65,10 +48,7 @@
         alt: props.attributes.alt,
         src: props.attributes.src 
     });
-    const imageStyles = computed(() => ({
-        width: imageAttributes.value.width + "px",
-        height: imageAttributes.value.height + "px"
-    }))
+
     function openEditDialog() {
         editDialogRef.value?.openDialog()
     }
@@ -134,5 +114,8 @@
     top: 10px;
     right: 10px;
     z-index: 10;
+  }
+  .form_group {
+    display: grid;
   }
 </style>
